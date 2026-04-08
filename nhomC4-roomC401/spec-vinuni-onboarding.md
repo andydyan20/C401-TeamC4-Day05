@@ -22,9 +22,9 @@ Nhóm mình muốn xây dựng **Hệ thống AI Onboarding toàn diện**: mộ
 | **Value khi AI đúng?**<br>- Trả lời tức thời theo ngữ cảnh cá nhân hóa (vai trò/kỳ/đơn vị).<br>- Setup checklist quy trình cụ thể, bám nguồn chính thức. | **Trust recovery?**<br>- Cho phép nhanh chóng "Báo sai" và route/escalate sang đúng phòng ban để xử lý. | |
 
 > **Learning Signal:**
-> **(1) User correction đi vào đâu?** Lưu feedback theo Q/A: “câu trả lời hữu ích/không”, lí do sai (lỗi nguồn, hiểu câu hỏi sai, tài liệu cũ) và đoạn trích đúng → cập nhật bộ tri thức + prompt/routing.
-> **(2) Product thu signal gì để biết đang tốt lên hay tệ đi?** Tỉ lệ “resolved without escalation”, tỉ lệ click form/link, thời gian hoàn thành checklist, số lần hỏi lặp lại cùng intent, % câu trả lời có nguồn trích dẫn.
-> **(3) Data thuộc loại nào? Có marginal value không?** Thuộc loại User-specific, Domain-specific, Real-time và Human-judgment. **Sẽ có marginal value** vì: tài liệu nội bộ thay đổi theo kỳ, lượng câu hỏi theo ngữ cảnh lớn, feedback khám phá ra lỗ hổng policy để cải thiện knowledge base.
+> **(1) User correction đi vào đâu?** Dữ liệu từ nút Helpful/Not helpful và luồng Báo sai sẽ được đẩy thẳng vào Event Logs lưu tại Database. Những câu hỏi bị bot hỏi lại (mơ hồ) hoặc bot từ chối trả lời sẽ được tổng hợp để bộ phận Đào tạo/HR cập nhật thêm "Data fix cứng" (FAQ mới).  
+> **(2) Product thu signal gì để biết đang tốt lên hay tệ đi?** Tỉ lệ “resolved without escalation”, tỉ lệ click form/link, thời gian hoàn thành checklist, số lần hỏi lặp lại cùng intent, % câu trả lời có nguồn trích dẫn.  
+> **(3) Data thuộc loại nào?** Thuộc loại User-specific, Domain-specific, Real-time và Human-judgment. **Có marginal value không?** Sẽ có marginal value vì: tài liệu nội bộ thay đổi theo kỳ, lượng câu hỏi theo ngữ cảnh lớn, feedback khám phá ra lỗ hổng policy để cải thiện knowledge base.
 
 ---
 
