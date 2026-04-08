@@ -2,6 +2,15 @@
 
 Lab 5 submission for "AI Thuc Chien - Ngay 5", focused on designing an AI product that handles uncertainty safely.
 
+## Team
+
+Team name: `C4`
+
+- Dang Tien Dung - `2A202600024`
+- Pham Huu Hoang Hiep - `2A202600415`
+- Pham Viet Cuong - `2A202600420`
+- Pham Tran Thanh Lam - `2A202600270`
+
 ## Project Overview
 
 `VinUni Onboarding Agent` is an augmentation-first AI assistant for:
@@ -78,13 +87,6 @@ This repo is currently documentation-first. To review the full submission:
 1. Read the spec in `nhomC4-roomC401/spec-vinuni-onboarding.md`
 2. Review implementation details in `nhomC4-roomC401/implementation-plan.md`
 3. Check ownership and deliverables in `nhomC4-roomC401/team-deliverables.md`
-
-## Team
-
-- Dang Tien Dung - `2A202600024`
-- Pham Huu Hoang Hiep - `2A202600415`
-- Pham Viet Cuong - `2A202600420`
-- Pham Tran Thanh Lam - `2A202600270`
 
 ## Notes
 
