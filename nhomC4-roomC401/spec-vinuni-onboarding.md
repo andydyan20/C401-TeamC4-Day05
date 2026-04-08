@@ -15,31 +15,16 @@ Nhóm mình muốn xây dựng **Hệ thống AI Onboarding toàn diện**: mộ
 
 ## Canvas draft
 
-|   | Value | Trust | Feasibility |
-|---|-------|-------|-------------|
-| **Câu hỏi guide** | User nào? Pain gì? AI giải quyết gì mà cách hiện tại không giải được? | Khi AI sai thì user bị ảnh hưởng thế nào? User biết AI sai bằng cách nào? User sửa bằng cách nào? | Cost bao nhiêu/request? Latency bao lâu? Risk chính là gì? |
-| **Trả lời** | **User**: tân sinh viên (UG/PG), nhân viên mới, mentor/HR/Student Affairs. **Pain**: info phân tán, hỏi đi hỏi lại, trễ deadline, sai thủ tục. **AI giúp**: trả lời tức thời theo ngữ cảnh + checklist onboarding cá nhân hóa (theo vai trò/kỳ/đơn vị) mà vẫn bám nguồn chính thức. | **Sai**: hướng dẫn sai quy định/điền nhầm form/trễ hạn → ảnh hưởng học vụ/nhân sự. **Biết sai**: agent hiển thị “nguồn trích dẫn”, ngày cập nhật, mức tự tin; user thấy mâu thuẫn với portal/email. **Sửa**: nút “Báo sai/Không đúng” + chọn câu trả lời đúng/đính kèm link; hoặc “Escalate” đến bộ phận liên quan. | **Feasibility**: RAG trên tài liệu nội bộ (handbook, FAQ, policy, form). Latency mục tiêu 2–5s (cache + retrieval). Cost theo token + retrieval; giới hạn lượt/phiên. **Risk**: dữ liệu nội bộ & PII, tài liệu lỗi thời, hallucination, quyền truy cập theo vai trò (RBAC). |
+| VALUE | TRUST | FEASIBILITY |
+| :--- | :--- | :--- |
+| **User nào? Pain nào?**<br>- **User**: Tân sinh viên (UG/PG), nhân viên mới, mentor/HR/Student Affairs.<br>- **Pain**: Info phân tán, hỏi đi hỏi lại, trễ deadline, sai thủ tục. | **Precision hay recall?**<br>- **Precision**. RAG cho hành chính/học vụ không được sai sót. Không tìm ra thông tin thì trả lời "Tôi không biết" thay vì bịa. | **Cost / latency?**<br>- **Latency**: Mục tiêu 2–5s (RAG cache + retrieval).<br>- **Cost**: Theo token + retrieval; có giới hạn lượt/phiên. |
+| **Automation hay augmentation?**<br>- **Augmentation**: AI gợi ý, kéo luồng trích nguồn. User quyết định cuối cùng vì các bước onboarding có yếu tố "high-stakes". | **Khi sai → user biết/sửa thế nào?**<br>- **Biết sai**: Agent hiện "nguồn trích dẫn", user thấy mâu thuẫn với portal/email.<br>- **Sửa**: Nút "Báo sai/Không đúng" + đính kèm link, hoặc "Escalate" đến bộ phận liên quan. | **Dependency / risk chính?**<br>- **Dependency**: Phụ thuộc nội dung từ tài liệu nội bộ VinUni (FAQ, policy, form...).<br>- **Risk**: Lộ thông tin nội bộ/PII, tài liệu lỗi thời, hallucination, thiếu phân quyền (RBAC). |
+| **Value khi AI đúng?**<br>- Trả lời tức thời theo ngữ cảnh cá nhân hóa (vai trò/kỳ/đơn vị).<br>- Setup checklist quy trình cụ thể, bám nguồn chính thức. | **Trust recovery?**<br>- Cho phép nhanh chóng "Báo sai" và route/escalate sang đúng phòng ban để xử lý. | |
 
----
-
-## Automation hay augmentation?
-
-☐ Automation — AI làm thay, user không can thiệp  
-☑ Augmentation — AI gợi ý, user quyết định cuối cùng
-
-**Justify:** Onboarding có nhiều bước “high-stakes” (deadline, giấy tờ, quyết định học vụ). Agent nên **gợi ý + dẫn luồng + trích nguồn**, còn user/đơn vị phụ trách vẫn là điểm quyết định và xác nhận cuối.
-
----
-
-## Learning signal
-
-| # | Câu hỏi | Trả lời |
-|---|---------|---------|
-| 1 | User correction đi vào đâu? | Lưu feedback theo Q/A: “câu trả lời hữu ích/không”, chọn lý do sai (lỗi nguồn, lỗi hiểu câu hỏi, tài liệu cũ), và link/đoạn trích đúng → cập nhật bộ tri thức + prompt/routing. |
-| 2 | Product thu signal gì để biết tốt lên hay tệ đi? | Tỉ lệ “resolved without escalation”, tỉ lệ click đúng form/link, thời gian hoàn thành checklist, số lần hỏi lại cùng intent, tỉ lệ feedback tiêu cực theo chủ đề, và % câu trả lời có nguồn trích dẫn. |
-| 3 | Data thuộc loại nào? ☐ User-specific · ☐ Domain-specific · ☐ Real-time · ☐ Human-judgment · ☐ Khác: ___ | ☑ User-specific (vai trò/kỳ/khoa) · ☑ Domain-specific (policy/FAQ) · ☑ Real-time (deadline/đợt tuyển/portal status) · ☑ Human-judgment (phản hồi đúng/sai) |
-
-**Có marginal value không?** Có. Dữ liệu có giá trị vì: (1) tài liệu nội bộ thay đổi theo kỳ/đợt, (2) câu hỏi lặp lại theo ngữ cảnh VinUni, (3) feedback giúp phát hiện “chỗ policy gây hiểu lầm” và ưu tiên cập nhật knowledge base.
+> **Learning Signal:**
+> **(1) User correction đi vào đâu?** Lưu feedback theo Q/A: “câu trả lời hữu ích/không”, lí do sai (lỗi nguồn, hiểu câu hỏi sai, tài liệu cũ) và đoạn trích đúng → cập nhật bộ tri thức + prompt/routing.
+> **(2) Product thu signal gì để biết đang tốt lên hay tệ đi?** Tỉ lệ “resolved without escalation”, tỉ lệ click form/link, thời gian hoàn thành checklist, số lần hỏi lặp lại cùng intent, % câu trả lời có nguồn trích dẫn.
+> **(3) Data thuộc loại nào? Có marginal value không?** Thuộc loại User-specific, Domain-specific, Real-time và Human-judgment. **Sẽ có marginal value** vì: tài liệu nội bộ thay đổi theo kỳ, lượng câu hỏi theo ngữ cảnh lớn, feedback khám phá ra lỗ hổng policy để cải thiện knowledge base.
 
 ---
 
